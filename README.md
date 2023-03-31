@@ -1,4 +1,4 @@
-# Pages
+# I. Pages
 ## Login Page
 ![image](https://user-images.githubusercontent.com/86547861/229022387-2c6b2812-118a-4ddc-9bbf-fcea739b6786.png)
 ## Signup Page 
@@ -10,7 +10,7 @@
 ## Update User Profile
 ![image](https://user-images.githubusercontent.com/86547861/229022509-ca70ba6c-b85e-4aae-a9cc-374b2f0bf07b.png)
 
-# Main Tasks
+# II. Main Tasks
 1. Login task
 2. Register User task
 3. Get user list
