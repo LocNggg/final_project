@@ -1,11 +1,12 @@
 # final_project
 ## Login Page
-![image](https://user-images.githubusercontent.com/86547861/229018393-5b34f2ca-5653-4ed9-9a8b-b966ede49c89.png)
-## Signup Page
-![image](https://user-images.githubusercontent.com/86547861/229018448-9cdf2412-9cdb-4cfb-8ef2-84b79cb74a9e.png)
-## Mange user accounts with Admin access
-![image](https://user-images.githubusercontent.com/86547861/229018519-40f0cebe-c05d-4399-9924-28bcef1b6df1.png)
-## Mange user accounts with User access
-![image](https://user-images.githubusercontent.com/86547861/229018835-52a35d47-5ce2-4d0e-b236-79b913da75a8.png)
+![image](https://user-images.githubusercontent.com/86547861/229022387-2c6b2812-118a-4ddc-9bbf-fcea739b6786.png)
+## Signup Page 
+![image](https://user-images.githubusercontent.com/86547861/229022416-560b43be-ea6f-46a6-9e92-9c568b7da87c.png)
+## Manage User with Admin access
+![image](https://user-images.githubusercontent.com/86547861/229022472-6ea367f5-f5eb-47bb-935c-d20d448d55dd.png)
+## Manage User with User access
+![image](https://user-images.githubusercontent.com/86547861/229022552-25dd4608-0608-42f2-bb6d-e668417f7bdf.png)
 ## Update User Profile
-![image](https://user-images.githubusercontent.com/86547861/229018984-ea68def1-5176-473e-9661-778ff308b33d.png)
+![image](https://user-images.githubusercontent.com/86547861/229022509-ca70ba6c-b85e-4aae-a9cc-374b2f0bf07b.png)
+
