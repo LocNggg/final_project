@@ -14,7 +14,22 @@
 1. Login task
 2. Register User task
 3. Get user list
-4. Delete user with by ID (Admin access)
+4. Delete user by ID (Admin access)
 5. Edit Personal Profile
 6. Set Login Page as default if not Authenticated
 7. Prevent to navigate to /login Page when Authenticated
+
+# III. User/ Admin Permission
+1. Admin:
+  + Edit personal information
+  + Delete button is visible
+  + Admin can delete user by the user list
+2. User:
+  + Edit personal information
+  + Delete button is invisible
+# IV. Techniques and libraries
+1. React Router DOM
+2. MUI
+3. MUI-X
+4. React-bootstrap
+5. Fontawesome Icon
