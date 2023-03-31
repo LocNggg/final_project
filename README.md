@@ -1,3 +1,4 @@
+Create User Management project 
 # I. Pages
 ## Login Page
 ![image](https://user-images.githubusercontent.com/86547861/229022387-2c6b2812-118a-4ddc-9bbf-fcea739b6786.png)
@@ -28,8 +29,13 @@
   + Edit personal information
   + Delete button is invisible
 # IV. Techniques and libraries
-1. React Router DOM
+Frontend:
+1. React JS
 2. MUI
 3. MUI-X
 4. React-bootstrap
 5. Fontawesome Icon
+6. Redux
+Backend:
+1. Nodejs
+2. MongoDB
