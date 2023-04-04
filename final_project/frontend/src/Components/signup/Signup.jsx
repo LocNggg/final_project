@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL_AUTH } from "../../utils/api";
-
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export const Signup = () => {
     const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ export const Signup = () => {
     const [lastname, setLastname] = useState("");
     const [phone, setPhone] = useState("");
     const [location, setLocation] = useState("");
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -25,7 +26,17 @@ export const Signup = () => {
                 email,
             };
             const res = await axios.post(`${BASE_URL_AUTH}/register`, newUser);
-            window.location.href = "login";
+            toast.success('Sign up successfully!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+            navigate('/login')
         } catch (error) {
             console.log(error);
         }
@@ -103,6 +114,48 @@ export const Signup = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
+                    {/* <div className="input-box">
+                    <label>Password</label>
+                    <PasswordInputField 
+                            handlePasswordChange={handlePasswordChange} 
+                            handleValidation={handleValidation} 
+                            passwordValue={passwordInput.password} 
+                            passwordError={passwordError}/>
+                    </div>
+                    <div className="input-box">
+                    <label>Confirm Password</label>
+                    <ConfirmPasswordInputField 
+                            handlePasswordChange={handlePasswordChange} 
+                            handleValidation={handleValidation} 
+                            confirmPasswordValue={passwordInput.confirmPassword} 
+                            confirmPasswordError={confirmPasswordError}/>
+
+                    </div> */}
+                    {/* <div className="row">
+                        <div className="col-sm-4">
+                            <PasswordInputField 
+                            handlePasswordChange={handlePasswordChange} 
+                            handleValidation={handleValidation} 
+                            passwordValue={passwordInput.password} 
+                            passwordError={passwordError}/>
+                            <ConfirmPasswordInputField 
+                            handlePasswordChange={handlePasswordChange} 
+                            handleValidation={handleValidation} 
+                            confirmPasswordValue={passwordInput.confirmPassword} 
+                            confirmPasswordError={confirmPasswordError}/>
+                        </div>
+                    </div> */}
+                    {/* <div className="input-box">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Enter password"
+                            value={confirmPassword}
+                            onChange={(e) => setPassword(e.target.value)}
+                            {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
+                        />
+                    </div> */}
                     <div className="input-box">
                         <input type="submit" name="" value="Sign up" />
                     </div>
