@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Button from "@mui/material/Button";
@@ -8,6 +8,8 @@ import { BASE_URL_USER } from "../../utils/api";
 import { headers } from "../../utils/headers";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
 import './Team.css'
 
 export const User = ({ }) => {
@@ -75,7 +77,7 @@ export const User = ({ }) => {
             <Button
               variant="contained"
               color="error"
-              onClick={() => handleRemoveUser(data.row._id)}
+              onClick={() => submitDelete(data.row._id)}
             >
               Delete
             </Button>
@@ -140,6 +142,21 @@ export const User = ({ }) => {
       flex: 1,
     },
   ];
+  const submitDelete = (props) => {
+    confirmAlert({
+      title: 'Delete account',
+      message: 'Are you sure to delete this account?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleRemoveUser(props)
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  }
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
@@ -182,8 +199,7 @@ export const User = ({ }) => {
   useEffect(() => {
     handleGetUsers();
   }, []);
-
-  // delete
+  
   const handleRemoveUser = async (userId) => {
     try {
       const { data: res } = await axios.delete(
@@ -194,6 +210,16 @@ export const User = ({ }) => {
       );
       console.log(res);
       setUsers(users.filter((user) => user._id !== userId));
+      toast.success('User deleted!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
       throw new Error(error);
     }
@@ -240,13 +266,13 @@ export const User = ({ }) => {
             }
           }}
         >
-          <DataGrid checkboxSelection rows={users} columns={currentUser.isAdmin == true ? columns : columns0} autoHeight initialState={{
+          <DataGrid rows={users} columns={currentUser.isAdmin == true ? columns : columns0} autoHeight initialState={{
             pagination: {
               paginationModel: {
                 pageSize: 10,
               },
             },
-          }} />
+          }} slots={{ toolbar: GridToolbar }} />
         </Box>
       </Box>
     </div>
