@@ -24,19 +24,21 @@ Create User Management project
 # III. User/ Admin Permission
 1. Admin:
   + Edit personal information
-  + Delete button is visible
+  + Delete button is visible on Manage Users page
   + Admin can delete user by the user list
+  + Admin can delete themselves on Personal page, redirect to the Login page after deleting account
 2. User:
   + Edit personal information
-  + Delete button is invisible
+  + Delete button is invisible on Manage Users page
+  + User can delete themselves on Personal page, redirect to the Login page after deleting account
 # IV. Techniques and libraries
-Frontend:
+## Frontend:
 1. React JS
 2. MUI
 3. MUI-X
 4. React-bootstrap
 5. Fontawesome Icon
 6. Redux
-Backend:
+## Backend:
 1. Nodejs
 2. MongoDB
