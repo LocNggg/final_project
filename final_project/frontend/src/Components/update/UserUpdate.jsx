@@ -3,11 +3,27 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL_USER } from "../../utils/api";
 import { headers } from "../../utils/headers";
 import './UserUpdate.css'
-
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 export const UserUpdate = () => {
   const [newData, setNewData] = useState(null);
   const id = localStorage.getItem("userId");
   const [currentUser, setCurrentUser] = useState({});
+  const [users, setUsers] = useState([])
+  const handleGetUsers = async () => {
+    try {
+      const { data: res } = await axios.get(`${BASE_URL_USER}`, {
+        headers,
+      });
+      setUsers(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    handleGetUsers();
+  }, []);
   // get current user
   const handleGetCurrentUser = async () => {
     try {
@@ -39,8 +55,72 @@ export const UserUpdate = () => {
         }
       );
       console.log(res);
-      window.location.href = "/user";
+      // window.location.href = "/user";
+      toast.success('User updated!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     } catch (error) {
+      throw new Error(error);
+    }
+  };
+  const submitDelete = () => {
+    confirmAlert({
+      title: 'Delete account',
+      message: 'Are you sure to delete this account?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => handleRemoveUser()
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  }
+
+  const handleRemoveUser = async (e) => {
+    // e.preventDefault();
+    try {
+      const { data: res } = await axios.delete(
+        `${BASE_URL_USER}/${id}/delete`,
+        {
+          headers,
+        }
+      );
+      console.log(res);
+      setUsers(users.filter((user) => user._id !== id));
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userId");
+      window.location.href = "/login"
+      toast.success('User deleted!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      toast.error('User not deleted!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       throw new Error(error);
     }
   };
@@ -59,8 +139,8 @@ export const UserUpdate = () => {
               <img className="img-account-profile rounded-circle mb-2"
                 alt="profile-user"
                 src="https://cdn-icons-png.flaticon.com/512/219/219983.png" />
-              <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-              <button className="btn" type="button">Upload new image</button>
+              <div className="small font-italic text-muted mb-4">{currentUser.username}</div>
+              <button className="btn delete" onClick={submitDelete}>Delete my account</button>
             </div>
           </div>
         </div>
@@ -97,7 +177,9 @@ export const UserUpdate = () => {
                     <input className="form-control" type="text" placeholder="Enter your location" defaultValue={currentUser.location} name="location" onChange={handleChange} />
                   </div>
                 </div>
-                <button className="btn">Save changes</button>
+                <div className="btn-container">
+                  <button className="btn">Save changes</button>
+                </div>
               </form>
             </div>
           </div>
