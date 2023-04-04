@@ -9,6 +9,8 @@ import { UserUpdate } from './Components/update/UserUpdate';
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { PageLayout } from "./Components/layout/PageLayout"
+import { ToastContainer} from 'react-toastify';
+
 
 function App() {
     const token = localStorage.getItem("accessToken")
@@ -24,10 +26,22 @@ function App() {
         }, [accessToken, userId]);
 
     return (
+        <>
         <BrowserRouter>
+        <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark" />
             <div className='app'>
                 <Routes>
-                    <Route path="/login" element={!token  ? <Login /> : <Navigate to="/home" />} />
+                    <Route path="/login" element={!token ? <Login /> : <Navigate to="/home" />} />
                     <Route path="/register" element={<Signup />} />
                     <Route path="/*" element={<Login />} />
                     <Route path="/" element={<PageLayout />}>
@@ -38,6 +52,8 @@ function App() {
                 </Routes>
             </div>
         </BrowserRouter>
+        </>
+
     )
 }
 
