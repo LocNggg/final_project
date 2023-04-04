@@ -36,9 +36,11 @@ Create User Management project
 1. React JS
 2. MUI
 3. MUI-X
-4. React-bootstrap
+4. react-bootstrap
 5. Fontawesome Icon
 6. Redux
+7. react-toastify
+8. react-confirm-alert
 ## Backend:
 1. Nodejs
 2. MongoDB
