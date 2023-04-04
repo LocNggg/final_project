@@ -4,13 +4,16 @@ import { useDispatch } from "react-redux";
 import { BASE_URL_AUTH } from "../../utils/api";
 import { login, loginSuccess } from "../../redux/actions/auth";
 import "./Login.css"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-
-    const handleSubmit = async (e) => {
+    const navigate = useNavigate();
+;    const handleSubmit = async (e) => {
         e.preventDefault();
         const user = {
             username,
@@ -21,9 +24,31 @@ export const Login = () => {
             const { data: res } = await axios.post(`${BASE_URL_AUTH}/login`, user);
             // send token to redux store
             dispatch(loginSuccess({ accessToken: res.accessToken, userId: res._id }));
-            window.location.href = "/home";
+            console.log("login success");
+            toast.success('Login successfully!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+            // navigate('/home');
+            window.location.href='/home'
         } catch (error) {
             console.log(error);
+            toast.error('Login failed!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         }
     };
     return (
